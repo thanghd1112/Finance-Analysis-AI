@@ -2,7 +2,17 @@
 
 ## Overview
 This project is a basic tool for stock market analysis, financial reporting, and trend prediction. Built with Streamlit, the application provides an intuitive interface for investors and financial analysts to analyze stocks, compare market performance, examine sector trends, and evaluate news sentiment. Designed as an **AI-powered agent**, it can be extended with new features, making it a collaborative and evolving tool for the community.
+
 **Real-time** market data is fetched directly from Yahoo Finance, ensuring that users always have the most up-to-date stock prices, financial statements, and market trends.
+
+## Demo
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=6UHb2F_DPlY" target="_blank">
+    <img src="https://www.youtube.com/watch?v=6UHb2F_DPlY/0.jpg" alt="Finance Analysis Demo" width="600">
+  </a>
+</p>
+<p align="center">Click the image above to watch the demo video</p>
+
 
 ## Features
 
