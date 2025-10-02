@@ -1,0 +1,112 @@
+/* Chat interface styling */
+/* In chat_Interface.css, update the chat-container styling */
+.chat-container {
+  max-width: 100%;
+  margin: 0 auto 15px auto; /* Added bottom margin */
+  padding: 10px;
+  height: 400px; /* Fixed height */
+  overflow-y: auto;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make sure messages stay within container */
+.chat-message {
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+  
+.chat-question {
+  background-color: #DCF8C6;
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+  border-bottom-right-radius: 2px;
+  max-width: 80%; /* Giới hạn chiều rộng tối đa 80% để tránh quá rộng */
+  width: max-content; /* Sử dụng max-content thay vì fit-content để đảm bảo nội dung đầy đủ hiển thị */
+  min-width: 50px; /* Chiều rộng tối thiểu */
+  display: inline-block;
+
+  clear: both; /* Đảm bảo tin nhắn không bị chồng lên nhau */
+  white-space: pre-wrap; /* Giữ nguyên khoảng trắng và xuống dòng khi cần */
+  word-break: break-word; /* Ngắt từ khi cần thiết */
+  box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+
+/* Đảm bảo container tin nhắn hoạt động đúng với float */
+.chat-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Điều chỉnh lại cho tin nhắn trả lời */
+.chat-answer {
+  background-color: #FFFFFF;
+  margin-right: auto;
+  margin-left: 0;
+  text-align: left;
+  border-bottom-left-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  float: left; /* Để nằm bên trái */
+  clear: both; /* Đảm bảo tin nhắn không bị chồng lên nhau */
+  max-width: 80%; /* Đảm bảo không quá rộng */
+}
+
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  width: 70%; /* Make the input container smaller */
+  float: left;
+}
+
+.chat-input-wrapper {
+  position: relative;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.chat-input {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px; /* Để dành chỗ cho nút gửi */
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+}
+
+.chat-send-button {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #1E88E5;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 100;
+}
+
+.chat-send-button:hover {
+  color: #0D47A1;
+}
+
+/* Code block styling */
+.code-block {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  border-left: 3px solid #2196F3;
+  font-family: monospace;
+  overflow-x: auto;
+  margin: 10px 0;
+}

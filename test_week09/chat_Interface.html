@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="chat_interface.css">
+</head>
+<body>
+    <div class="chat-container" id="chat-container">
+        <!-- Chat messages will be inserted here dynamically -->
+        {% for message in chat_history %}
+            {% if message.type == 'question' %}
+                <div class="chat-message chat-question">{{ message.content | safe }}</div>
+            {% else %}
+                <div class="chat-message chat-answer">{{ message.content | safe }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    <div class="chat-input-container">
+        <input type="text" class="chat-input" id="chat-input" placeholder="Nhập câu hỏi của bạn..." />
+        <button class="chat-send-button">▶</button>
+    </div>
+
+    <script src="chat_interface.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Tài Chính</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="report-container">
+        <header>
+            <h1>BÁO CÁO TÀI CHÍNH: {{company_name}}</h1>
+            <div class="separator"></div>
+        </header>
+        
+        <section class="basic-info">
+            <h2>Thông tin cơ bản:</h2>
+            <ul>
+                <li><span class="label">Tên công ty:</span> {{company_name}}</li>
+                <li><span class="label">Mã chứng khoán:</span> {{ticker}}</li>
+                <li><span class="label">Ngành:</span> {{sector}}</li>
+                <li><span class="label">Giá hiện tại:</span> {{current_price}}</li>
+                <li><span class="label">Vốn hóa thị trường:</span> {{market_cap}}</li>
+            </ul>
+        </section>
+        
+        {% if has_complete_data %}
+        <section class="financial-ratios">
+            <h2>Chỉ số tài chính chính (từ {{analysis_date}}):</h2>
+            <ul>
+                <li><span class="label">Tỷ số thanh toán hiện hành:</span> {{current_ratio}}</li>
+                <li><span class="label">ROA (Tỷ suất sinh lời trên tài sản):</span> {{roa}}</li>
+                <li><span class="label">ROE (Tỷ suất sinh lời trên vốn chủ sở hữu):</span> {{roe}}</li>
+                <li><span class="label">Tỷ số nợ trên tài sản:</span> {{debt_to_assets}}</li>
+            </ul>
+        </section>
+        
+        <section class="analysis">
+            <h2>Phân tích:</h2>
+            <ul>
+                {% for analysis_item in analysis_items %}
+                <li>{{analysis_item}}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% else %}
+        <section class="technical-analysis">
+            <h2>Phân tích Kỹ thuật:</h2>
+            <ul>
+                {% for tech_item in technical_items %}
+                <li>{{tech_item}}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <section class="warning">
+            <p>LƯU Ý: Không đủ dữ liệu để thực hiện phân tích tài chính đầy đủ chỉ chứa thông tin cơ bản.<br>
+            Báo cáo này chỉ mang tính chất tham khảo và không kêu gọi đầu tư.</p>
+        </section>
+        <section class="tabs">
+            <button class="tab-btn active" data-tab="overview">Tổng quan</button>
+            <button class="tab-btn" data-tab="financial">Chỉ số tài chính</button>
+            <button class="tab-btn" data-tab="technical">Phân tích kỹ thuật</button>
+            <button class="tab-btn" data-tab="forecast">Dự báo</button>
+        </section>
+       
+        
+        <footer>
+            <div class="report-date">Báo cáo được tạo vào: {{report_date}}</div>
+        </footer>
+    </div>
+    <script src="report.js"></script>
+</body>
+</html>

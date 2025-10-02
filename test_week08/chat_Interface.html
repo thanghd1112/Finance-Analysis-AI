@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hỏi Đáp Tài Chính</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f5f7fa;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            padding: 20px;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            height: 600px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .chat-message {
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 4px 0;
+        }
+
+        .chat-question {
+            align-self: flex-end;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 15px 15px 0 15px;
+        }
+
+        .chat-answer {
+            align-self: flex-start;
+            background-color: #f1f3f4;
+            color: #202124;
+            border-radius: 15px 15px 15px 0;
+        }
+
+        .chat-input-container {
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 40px 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .send-button {
+            position: absolute;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: #1a73e8;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+        }
+
+        .send-button:hover {
+            background: rgba(26, 115, 232, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            Hỏi đáp về AAPL
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message chat-question">
+                Giá hiện tại của AAPL là bao nhiêu?
+            </div>
+            <div class="chat-message chat-answer">
+                Giá đóng cửa gần nhất của AAPL là 237.56.
+            </div>
+            <div class="chat-message chat-question">
+                Giá cao nhất trong năm nay là bao nhiêu?
+            </div>
+            <div class="chat-message chat-answer">
+                Giá cao nhất của AAPL là 259.81, giá thấp nhất là 163.31 trong khoảng thời gian đã chọn.
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <div class="chat-input-box">
+                <input type="text" class="chat-input" id="userInput" placeholder="Nhập câu hỏi của bạn về AAPL">
+                <button class="send-button" id="sendButton">▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chatMessages');
+            const userInput = document.getElementById('userInput');
+            const sendButton = document.getElementById('sendButton');
+
+            // Mẫu câu trả lời
+            const sampleAnswers = [
+                "AAPL có P/E ratio là 32.58, cao hơn trung bình ngành.",
+                "Lợi nhuận quý gần nhất của Apple tăng 7.25% so với cùng kỳ năm trước.",
+                "Apple hiện có khoảng 173.2 tỷ USD tiền mặt và các khoản tương đương tiền mặt.",
+                "Chỉ báo RSI hiện tại của AAPL là 67.3, đang tiến gần vùng quá mua."
+            ];
+
+            function addMessage(text, isQuestion) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = isQuestion ? 'chat-message chat-question' : 'chat-message chat-answer';
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function handleSend() {
+                const text = userInput.value.trim();
+                if (text) {
+                    addMessage(text, true);
+                    userInput.value = '';
+                    
+                    // Giả lập phản hồi (trong ứng dụng thực tế, đây sẽ là API call)
+                    setTimeout(() => {
+                        const randomAnswer = sampleAnswers[Math.floor(Math.random() * sampleAnswers.length)];
+                        addMessage(randomAnswer, false);
+                    }, 1000);
+                }
+            }
+
+            sendButton.addEventListener('click', handleSend);
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSend();
+                }
+            });
+        });
+    </script><script src="report.js"></script>
+</body>
+</html>

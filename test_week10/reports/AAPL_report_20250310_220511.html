@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Tài Chính</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Fix text overlapping issues */
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .basic-info ul, 
+        .financial-ratios ul,
+        .analysis ul,
+        .technical-analysis ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .basic-info li,
+        .financial-ratios li,
+        .analysis li,
+        .technical-analysis li {
+            margin-bottom: 10px;
+            padding: 5px 0;
+            clear: both;
+        }
+
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            min-width: 200px;
+            margin-right: 10px;
+        }
+
+        .tabs {
+            margin: 20px 0;
+            clear: both;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            margin-right: 5px;
+            border: none;
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: #007bff;
+            color: white;
+        }
+
+        .warning {
+            clear: both;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+        }
+
+        footer {
+            clear: both;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Ensure proper spacing between sections */
+        section {
+            margin-bottom: 30px;
+            clear: both;
+        }
+
+        h1, h2 {
+            clear: both;
+            margin-bottom: 20px;
+        }
+
+        .separator {
+            clear: both;
+            height: 2px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+    </style>
+<style>:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --light-bg: #f5f7fa;
+    --text-color: #333;
+    --border-color: #ddd;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.report-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+}
+
+header {
+    background: var(--primary-color);
+    color: white;
+    padding: 25px 30px 15px;
+    text-align: center;
+    width: 100%;
+    clear: both;
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    word-wrap: break-word;
+}
+
+.separator {
+    height: 3px;
+    background: var(--secondary-color);
+    margin: 0 auto;
+    width: 100px;
+    clear: both;
+}
+
+section {
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--border-color);
+    clear: both;
+    width: 100%;
+    overflow: hidden;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--secondary-color);
+    padding-left: 10px;
+    clear: both;
+}
+
+ul {
+    list-style-type: none;
+    width: 100%;
+    overflow: hidden;
+}
+
+li {
+    margin-bottom: 10px;
+    padding-left: 15px;
+    position: relative;
+    clear: both;
+    word-wrap: break-word;
+}
+
+li:before {
+    content: "•";
+    color: var(--secondary-color);
+    position: absolute;
+    left: 0;
+}
+
+.label {
+    font-weight: 600;
+    color: var(--primary-color);
+    display: inline-block;
+    min-width: 200px;
+    margin-right: 10px;
+}
+
+.warning {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    margin: 15px 0;
+    color: #856404;
+    clear: both;
+    width: 100%;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border-color);
+    background: #f8f9fa;
+    width: 100%;
+    clear: both;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: all 0.3s;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    text-align: center;
+    min-width: 120px;
+}
+
+.tab-btn:hover {
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.tab-btn.active {
+    background: var(--secondary-color);
+    color: white;
+}
+
+footer {
+    padding: 10px;
+    clear: both;
+    width: 100%;
+}
+
+.report-date {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    color: #777;
+    background: #f8f9fa;
+    clear: both;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .report-container {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    header {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 22px;
+    }
+    
+    section {
+        padding: 15px;
+    }
+
+    .label {
+        min-width: 150px;
+    }
+    
+    .tab-btn {
+        flex: 0 0 50%;
+        min-width: 50%;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .tab-btn {
+        flex: 0 0 100%;
+        min-width: 100%;
+    }
+}
+
+/* Fix for tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    clear: both;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Fix for code blocks */
+pre, code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Chat interface styling */
+.chat-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.chat-message {
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+    clear: both;
+    display: block;
+}
+
+.chat-question {
+    background-color: #DCF8C6;
+    float: right;
+    text-align: right;
+    border-bottom-right-radius: 2px;
+}
+
+.chat-answer {
+    background-color: #FFFFFF;
+    float: left;
+    text-align: left;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 70%;
+    position: relative;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.chat-send-button {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #1E88E5;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.code-block {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 3px solid #2196F3;
+    font-family: monospace;
+    overflow-x: auto;
+    margin: 10px 0;
+    clear: both;
+}</style></head>
+<body>
+    <div class="report-container">
+        <header>
+            <h1>BÁO CÁO TÀI CHÍNH: Apple Inc.</h1>
+            <div class="separator"></div>
+        </header>
+        
+        <section class="basic-info">
+            <h2>Thông tin cơ bản:</h2>
+            <ul>
+                <li><span class="label">Tên công ty:</span> Apple Inc.</li>
+                <li><span class="label">Mã chứng khoán:</span> AAPL</li>
+                <li><span class="label">Ngành:</span> Technology</li>
+                <li><span class="label">Giá hiện tại:</span> 225.62</li>
+                <li><span class="label">Vốn hóa thị trường:</span> 3.39 T</li>
+            </ul>
+        </section>
+        
+        
+        <section class="technical-analysis">
+            <h2>Phân tích Kỹ thuật:</h2>
+            <ul>
+                
+                <li>Xu hướng ngắn hạn giảm: Giá hiện tại (225.59) thấp hơn SMA50 (238.02).</li>
+                
+                <li>Xu hướng dài hạn giảm: Giá hiện tại (225.59) thấp hơn SMA200 (226.82).</li>
+                
+                <li>Biến động giá 30 ngày: -1.75%</li>
+                
+            </ul>
+        </section>
+        
+
+        <section class="warning">
+            <p>LƯU Ý: Không đủ dữ liệu để thực hiện phân tích tài chính đầy đủ chỉ chứa thông tin cơ bản.<br>
+            Báo cáo này chỉ mang tính chất tham khảo và không kêu gọi đầu tư.</p>
+        </section>
+        <section class="tabs">
+            <button class="tab-btn active" data-tab="overview">Tổng quan</button>
+            <button class="tab-btn" data-tab="financial">Chỉ số tài chính</button>
+            <button class="tab-btn" data-tab="technical">Phân tích kỹ thuật</button>
+            <button class="tab-btn" data-tab="forecast">Dự báo</button>
+        </section>
+       
+        
+        <footer>
+            <div class="report-date">Báo cáo được tạo vào: 10/03/2025 22:05:11</div>
+        </footer>
+    </div>
+    <script src="report.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function() {
+    // Tab chuyển đổi chức năng
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Loại bỏ active class từ tất cả các buttons
+            tabBtns.forEach(b => b.classList.remove('active'));
+            // Thêm active class vào button hiện tại
+            this.classList.add('active');
+            
+            // Logic để hiển thị nội dung tab (sẽ cần kết hợp với backend)
+            const tabName = this.getAttribute('data-tab');
+            console.log('Tab đã chọn:', tabName);
+            
+            // Đây là nơi bạn sẽ thêm code để thay đổi nội dung hiển thị
+            
+        });
+    });
+});</script></body>
+</html>

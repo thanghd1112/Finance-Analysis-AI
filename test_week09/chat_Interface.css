@@ -1,0 +1,79 @@
+/* Chat interface styling */
+.chat-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .chat-message {
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  
+  .chat-question {
+    background-color: #DCF8C6;
+    margin-left: auto;
+    margin-right: 0;
+    text-align: right;
+    border-bottom-right-radius: 2px;
+  }
+  
+  .chat-answer {
+    background-color: #FFFFFF;
+    margin-right: auto;
+    margin-left: 0;
+    text-align: left;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  .chat-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 70%; /* Make the input container smaller */
+    float: left;
+  }
+  
+  .chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    position: relative;
+  }
+  
+  .chat-send-button {
+    position: absolute;
+    right: 32%; /* Adjust this value to position the button inside the input box */
+    background: none;
+    border: none;
+    color: #1E88E5;
+    cursor: pointer;
+    font-size: 20px;
+    transform: translateY(30%);
+  }
+  
+  .chat-send-button:hover {
+    color: #0D47A1;
+  }
+  
+  /* Code block styling */
+  .code-block {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 3px solid #2196F3;
+    font-family: monospace;
+    overflow-x: auto;
+    margin: 10px 0;
+  }

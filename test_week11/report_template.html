@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Tài Chính - {{company_name}}</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Fix text overlapping issues */
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .basic-info ul, 
+        .financial-ratios ul,
+        .analysis ul,
+        .technical-analysis ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .basic-info li,
+        .financial-ratios li,
+        .analysis li,
+        .technical-analysis li {
+            margin-bottom: 10px;
+            padding: 5px 0;
+            clear: both;
+        }
+
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            min-width: 200px;
+            margin-right: 10px;
+        }
+
+        .tabs {
+            margin: 20px 0;
+            clear: both;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            margin-right: 5px;
+            border: none;
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: #007bff;
+            color: white;
+        }
+
+        .warning {
+            clear: both;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+        }
+
+        footer {
+            clear: both;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Ensure proper spacing between sections */
+        section {
+            margin-bottom: 30px;
+            clear: both;
+        }
+
+        h1, h2 {
+            clear: both;
+            margin-bottom: 20px;
+        }
+
+        .separator {
+            clear: both;
+            height: 2px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <header>
+            <h1>BÁO CÁO TÀI CHÍNH: {{ticker}}</h1>
+            <div class="separator"></div>
+        </header>
+        
+        <section class="detailed-company-info">
+            <h2>Thông tin về công ty:</h2>
+            <ul>
+                <li><span class="label">Tên đầy đủ:</span> {{company_info.longName}}</li>
+                <li><span class="label">Ngành:</span> {{company_info.sector}}</li>
+                <li><span class="label">Vốn hóa thị trường:</span> {{market_cap}}</li>
+                <li><span class="label">Mô tả:</span> {{company_info.longBusinessSummary}}</li>
+                {% if 'website' in company_info %}
+                <li><span class="label">Website:</span> {{company_info.website}}</li>
+                {% endif %}
+            </ul>
+        </section>
+        
+        <section class="price-chart">
+            <h2>Biểu đồ giá và khối lượng:</h2>
+            <div class="chart-container" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                {% if chart_image %}
+                <img src="{{chart_image}}" alt="Biểu đồ giá và khối lượng {{ticker}}" class="tech-chart" style="max-width: 100%; height: auto;">
+                {% else %}
+                <p>Không thể hiển thị biểu đồ.</p>
+                {% endif %}
+            </div>
+        </section>
+        
+        {% if has_complete_data %}
+        <section class="financial-ratios">
+            <h2>Chỉ số tài chính chính (từ {{analysis_date_start}} đến {{analysis_date_end}}):</h2>
+            <ul>
+                <li><span class="label">Tỷ số thanh toán hiện hành:</span> {{current_ratio}}</li>
+                <li><span class="label">ROA (Tỷ suất sinh lời trên tài sản):</span> {{roa}}</li>
+                <li><span class="label">ROE (Tỷ suất sinh lời trên vốn chủ sở hữu):</span> {{roe}}</li>
+                <li><span class="label">Tỷ số nợ trên tài sản:</span> {{debt_to_assets}}</li>
+                {% if 'peg_ratio' in financial_metrics %}
+                <li><span class="label">Tỷ số P/E trên tăng trưởng (PEG):</span> {{financial_metrics.peg_ratio}}</li>
+                {% endif %}
+                {% if 'dividend_yield' in financial_metrics %}
+                <li><span class="label">Tỷ lệ cổ tức:</span> {{financial_metrics.dividend_yield}}</li>
+                {% endif %}
+            </ul>
+        </section>
+        
+        <section class="fundamental-analysis">
+            <h2>Phân tích cơ bản:</h2>
+            <ul>
+                {% for analysis_item in analysis_items %}
+                <li>{{analysis_item}}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Nhìn chung:</strong> {{financial_analysis}}</p>
+        </section>
+        {% endif %}
+        {% if has_complete_data %}
+        <section class="technical-analysis">
+            <h2>Phân tích Kỹ thuật:</h2>
+            <div class="chart-container" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                {% if technical_chart %}
+                <img src="{{technical_chart}}" alt="Biểu đồ kỹ thuật {{ticker}}" class="tech-chart" style="max-width: 100%; height: auto;">
+                {% else %}
+                <p>Không thể hiển thị biểu đồ kỹ thuật.</p>
+                {% endif %}
+            </div>
+            <p>Ta thấy:</p>
+            <ul>
+                {% for tech_item in technical_items %}
+                <li>{{tech_item}}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        
+        <section class="summary">
+            <p>{{summary_text}}</p>
+        </section>
+
+        {% if not has_complete_data %}
+        <section class="warning">
+            <p>LƯU Ý: Báo cáo này chỉ dựa trên dữ liệu có sẵn và chỉ mang tính chất tham khảo, không phải là lời khuyên đầu tư. Vui lòng tham khảo chuyên gia tài chính trước khi đưa ra quyết định đầu tư.</p>
+        </section>
+        {% endif %}
+        
+        <section class="tabs">
+            <button class="tab-btn active" data-tab="overview">Tổng quan báo cáo</button>
+            <button class="tab-btn" data-tab="financial">Chỉ số tài chính</button>
+            <button class="tab-btn" data-tab="technical">Phân tích kỹ thuật</button>
+        </section>
+        
+        <footer>
+            <div class="report-date">Báo cáo được tạo vào: {{report_date}}</div>
+        </footer>
+    </div>
+    <script src="report.js"></script>
+</body>
+</html>
