@@ -8,7 +8,7 @@ This project is a basic tool for stock market analysis, financial reporting, and
 ## Demo
 <p align="center">
   <a href="https://www.youtube.com/watch?v=6UHb2F_DPlY" target="_blank">
-    <img src="https://www.youtube.com/watch?v=6UHb2F_DPlY/0.jpg" alt="Finance Analysis Demo" width="600">
+    <img src="https://img.youtube.com/vi/6UHb2F_DPlY/0.jpg" alt="Finance Analysis Demo" width="600">
   </a>
 </p>
 <p align="center">Click the image above to watch the demo video</p>
